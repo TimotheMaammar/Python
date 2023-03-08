@@ -7,19 +7,21 @@ import os
 from pytube import YouTube, Playlist
 
 ################################################################################
+
 dossier = input("Entrez le chemin où les vidéos seront téléchargées : \n")
 while not os.path.exists(dossier):
     print("Dossier introuvable ou inaccessible.")
     dossier = input("Entrez le chemin où les vidéos seront téléchargées : \n")
+   
 ################################################################################
 
-################################################################################
 pl_link = input("Entrez l'URL de la playlist Youtube : \n ")
 video_links = Playlist(pl_link).video_urls
 while len(video_links) == 0:
     print("Playlist introuvable ou inaccessible.")
     pl_link = input("Entrez l'URL de la playlist Youtube : \n ")
     video_links = Playlist(pl_link).video_urls
+    
 ################################################################################
 
 i = 0
