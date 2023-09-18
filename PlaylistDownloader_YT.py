@@ -1,4 +1,4 @@
- # 08/01/2022
+# 08/01/2022
 # Script permettant de télécharger d'un coup tout une playlist Youtube au lieu de passer par des sites web foireux.
 # Tous les cas ne sont pas gérés.
 # 720p maximum parce que je n'ai pas besoin de plus.
