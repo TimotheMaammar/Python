@@ -33,7 +33,7 @@ def main():
     print(f"Volume {volume} - {len(papers)} papers")
     print(f"{'='*80}\n")
 
-    for i, (title, link) in enumerate(papers, 1):
+    for i, (title, link) in enumerate(papers[-10:], 1):
         print(f"{i}. {title.strip()}")
         print(f"https://jmlr.org{link}\n")
 
