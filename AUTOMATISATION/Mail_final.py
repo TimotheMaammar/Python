@@ -7,15 +7,16 @@ from datetime import date
 # ── Configuration ────────────────────────────────────────────────────────────
 SMTP_HOST  = "smtp-relay.brevo.com"
 SMTP_PORT  = 587
-SMTP_USER  = "a54a73001@smtp-brevo.com"  # Adresse trouvée dans le profil Brevo
-SMTP_PASS  = "bskkiQ0959D4Owy"           # Mot de passe SMTP créé sur Brevo
+SMTP_USER  = "XXX@smtp-brevo.com"  # Adresse trouvée dans le profil Brevo
+SMTP_PASS  = "XXX"                       # Mot de passe SMTP créé sur Brevo
 MAIL_FROM  = "timothe.maammar@gmail.com" # Important pour le filtre
 MAIL_TO    = "timothe.maammar@gmail.com"
 
 SCRIPTS = [
-    ("HuggingFace daily papers", "Hugging.py"),
-    ("arXiv papers",          "arXiv.py"),
-    ("JMLR papers",              "JMLR.py")
+    ("HuggingFace daily papers", "/root/AUTOM_SCIENCE/Hugging.py"),
+    ("arXiv papers",             "/root/AUTOM_SCIENCE/arXiv.py"),
+    ("JMLR papers",              "/root/AUTOM_SCIENCE/JMLR.py"),
+    ("Frontiers papers",         "/root/AUTOM_SCIENCE/Frontiers.py")
 ]
 # ─────────────────────────────────────────────────────────────────────────────
 
