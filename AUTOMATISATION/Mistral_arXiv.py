@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import requests, re, textwrap
+from datetime import datetime
 from mistralai import Mistral
 
 # Configuration
@@ -88,13 +89,25 @@ def summarize_abstract(title, abstract):
             model="mistral-small-latest",
             messages=[{
                 "role": "user",
-                "content": f"Résume cette étude en plusieurs phrases ou paragraphes : {title}\n\n{abstract}"
+                "content": f"Résume en quelques phrases ou paragraphes : {title}\n\n{abstract}"
             }]
         )
         return r.choices[0].message.content
     except Exception as e:
         print(f"  ⚠️ Erreur Mistral: {e}")
         return "(erreur lors du résumé)"
+
+def get_date_str():
+    now = datetime.now()
+    return now.strftime("%d-%m-%Y")
+
+def save_to_txt(content, date_str):
+    filename = f"arXiv_{date_str}.txt"
+    with open(filename, "w", encoding="utf-8") as f:
+        f.write(content)
+    print(f"✅ Fichier TXT sauvegardé: {filename}")
+    return filename
+
 
 def format_paper(index, paper, summary):
     lines = [
@@ -107,6 +120,8 @@ def format_paper(index, paper, summary):
 
 def main():
     try:
+        date_str = get_date_str()
+        
         # Récupération des papiers
         html = fetch_arxiv_html()
         papers = parse_papers(html)
@@ -116,8 +131,17 @@ def main():
             return
         
         total = len(papers)
+        
+        # Générer le contenu
+        output_lines = []
+        output_lines.append("=" * 80)
+        output_lines.append(f"  arXiv -- Derniers papiers (avec résumés Mistral) -- {min(MAX_PAPERS, total)} résultats")
+        output_lines.append(f"  Généré le {date_str}")
+        output_lines.append("=" * 80)
+        output_lines.append("")
+        
         print(f"\n{'='*80}")
-        print(f"  arXiv -- Derniers papiers")
+        print(f"  arXiv -- Derniers papiers (avec résumés Mistral) -- {min(MAX_PAPERS, total)} résultats")
         print(f"{'='*80}\n")
         
         # Résumé de chaque papier (limité à MAX_PAPERS)
@@ -127,10 +151,22 @@ def main():
             formatted = format_paper(idx, paper, summary)
             print(formatted)
             print()
+            
+            # Ajouter au contenu de sortie
+            output_lines.append(formatted)
+            output_lines.append("")
         
-        print(f"{'='*80}")
-        print(f"  ✅ {min(MAX_PAPERS, total)} papiers traités")
-        print(f"{'='*80}\n")
+        output_lines.append("=" * 80)
+        output_lines.append(f"  ✅ {min(MAX_PAPERS, total)} papiers traités")
+        output_lines.append("=" * 80)
+        
+        # Joindre tout le contenu
+        full_content = "\n".join(output_lines)
+        
+        # Sauvegarder en TXT
+        save_to_txt(full_content, date_str)
+        
+        print(f"\n✨ Résultats sauvegardés dans arXiv_{date_str}.txt")
         
     except Exception as e:
         print(f"❌ Erreur: {e}")
