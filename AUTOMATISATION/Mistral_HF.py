@@ -3,7 +3,7 @@ import requests, json, re, textwrap
 from datetime import datetime
 from mistralai import Mistral
 
-API_KEY = "9py6neQGhqWwjlTYV9vCFuKOxMl6uIc6"
+API_KEY = "XXX"
 BASE_URL = "https://huggingface.co/papers"
 MAX_PAPERS = 20
 
