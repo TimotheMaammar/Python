@@ -10,7 +10,6 @@ MAX_PAPERS = 20
 client = Mistral(api_key=API_KEY)
 
 def fetch_arxiv_html():
-    """Récupère la page de recherche arXiv"""
     print("[*] Fetching arXiv papers...")
     resp = requests.get(SEARCH_URL, timeout=15, headers={
         "User-Agent": "Mozilla/5.0 (compatible; arXiv-Scraper/1.0)"
@@ -19,7 +18,6 @@ def fetch_arxiv_html():
     return resp.text
 
 def parse_papers(html):
-    """Parse les papiers depuis le HTML arXiv"""
     papers = []
     blocks = re.findall(
         r'<li class="arxiv-result">(.*?)</li>',
@@ -82,7 +80,6 @@ def parse_papers(html):
     return papers
 
 def summarize_abstract(title, abstract):
-    """Demande à Mistral de résumer l'abstract"""
     if not abstract or abstract.strip() == "":
         return "(pas d'abstract trouvé)"
     
@@ -100,7 +97,6 @@ def summarize_abstract(title, abstract):
         return "(erreur lors du résumé)"
 
 def format_paper(index, paper, summary):
-    """Formate un papier pour l'affichage"""
     lines = [
         f"{chr(97 + index)}) {paper['title']}",
         f"   Date: {paper['date']} | Catégorie: {paper['cats']}",
