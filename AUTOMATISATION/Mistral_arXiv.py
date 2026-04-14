@@ -105,7 +105,7 @@ def save_to_txt(content, date_str):
     filename = f"arXiv_{date_str}.txt"
     with open(filename, "w", encoding="utf-8") as f:
         f.write(content)
-    print(f"✅ Fichier TXT sauvegardé: {filename}")
+    print(f"✅ Fichier sauvegardé: {filename}")
     return filename
 
 
@@ -135,13 +135,13 @@ def main():
         # Générer le contenu
         output_lines = []
         output_lines.append("=" * 80)
-        output_lines.append(f"  arXiv -- Derniers papiers (avec résumés Mistral) -- {min(MAX_PAPERS, total)} résultats")
+        output_lines.append(f"  arXiv -- Derniers papiers")
         output_lines.append(f"  Généré le {date_str}")
         output_lines.append("=" * 80)
         output_lines.append("")
         
         print(f"\n{'='*80}")
-        print(f"  arXiv -- Derniers papiers (avec résumés Mistral) -- {min(MAX_PAPERS, total)} résultats")
+        print(f"  arXiv -- Derniers papiers")
         print(f"{'='*80}\n")
         
         # Résumé de chaque papier (limité à MAX_PAPERS)
